@@ -15,7 +15,7 @@ const HeroSection = () => {
       <div className="container relative z-10">
         <div className="mx-auto max-w-4xl text-center text-white">
           <h1 className="mb-6 text-5xl font-bold leading-tight">
-            Hola xd
+            Inicia Tu Trayectoria Profesional
           </h1>
           <p className="mb-8 text-xl text-white/90">
             Descubre oportunidades de práctica significativas, rastrea tus aplicaciones y documenta tu jornada de aprendizaje con nuestro portal integral.
