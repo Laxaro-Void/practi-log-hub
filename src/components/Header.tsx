@@ -18,7 +18,7 @@ const Header = () => {
               <path d="M280.09 278.82C257.36 278.05 236.88 270.54 222.01 251.54C204.18 228.79 209.49 199.8 233.88 184.44C262.69 166.28 306.66 173.28 328.4 199.48C351.68 227.51 339.71 264.28 303.63 275.39C299.61 276.63 295.44 277.52 291.28 278.17C287.85 278.69 284.33 278.6 280.09 278.82" fill="hsl(var(--primary))" />
             </svg>
           </div>
-          <span className="text-xl font-bold text-foreground">PracticePortal</span>
+          <span className="text-xl font-bold text-foreground">PortalPrácticas</span>
         </Link>
 
         <nav className="flex items-center gap-6">
@@ -29,7 +29,7 @@ const Header = () => {
             }`}
           >
             <Home className="h-4 w-4" />
-            Home
+            Inicio
           </Link>
           <Link
             to="/practices"
@@ -38,7 +38,7 @@ const Header = () => {
             }`}
           >
             <Briefcase className="h-4 w-4" />
-            Practices
+            Prácticas
           </Link>
           <Link
             to="/dashboard"
@@ -47,7 +47,7 @@ const Header = () => {
             }`}
           >
             <User className="h-4 w-4" />
-            Dashboard
+            Panel
           </Link>
           <Link
             to="/logs"
@@ -56,13 +56,13 @@ const Header = () => {
             }`}
           >
             <FileText className="h-4 w-4" />
-            Daily Logs
+            Registros Diarios
           </Link>
         </nav>
 
         <Button variant="outline" size="sm">
           <User className="h-4 w-4" />
-          Profile
+          Perfil
         </Button>
       </div>
     </header>

@@ -15,22 +15,22 @@ const HeroSection = () => {
       <div className="container relative z-10">
         <div className="mx-auto max-w-4xl text-center text-white">
           <h1 className="mb-6 text-5xl font-bold leading-tight">
-            Launch Your Professional Journey
+            Inicia Tu Trayectoria Profesional
           </h1>
           <p className="mb-8 text-xl text-white/90">
-            Discover meaningful practice opportunities, track your applications, and document your learning journey with our comprehensive portal.
+            Descubre oportunidades de práctica significativas, rastrea tus aplicaciones y documenta tu jornada de aprendizaje con nuestro portal integral.
           </p>
           
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button variant="hero" size="lg" className="text-lg" asChild>
               <Link to="/practices">
-                Browse Practices
+                Explorar Prácticas
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" className="text-lg border-white text-white hover:bg-white/10" asChild>
               <Link to="/dashboard">
-                View Dashboard
+                Ver Panel
               </Link>
             </Button>
           </div>
@@ -45,21 +45,21 @@ const HeroSection = () => {
               <Search className="h-8 w-8" />
             </div>
             <div className="text-2xl font-bold">500+</div>
-            <div className="text-white/80">Practice Opportunities</div>
+            <div className="text-white/80">Oportunidades de Práctica</div>
           </div>
           <div className="text-center text-white">
             <div className="mb-2 flex justify-center">
               <Users className="h-8 w-8" />
             </div>
             <div className="text-2xl font-bold">1,200+</div>
-            <div className="text-white/80">Active Students</div>
+            <div className="text-white/80">Estudiantes Activos</div>
           </div>
           <div className="text-center text-white">
             <div className="mb-2 flex justify-center">
               <TrendingUp className="h-8 w-8" />
             </div>
             <div className="text-2xl font-bold">85%</div>
-            <div className="text-white/80">Success Rate</div>
+            <div className="text-white/80">Tasa de Éxito</div>
           </div>
         </div>
       </div>

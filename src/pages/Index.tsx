@@ -14,9 +14,9 @@ const Index = () => {
       {/* Features Section */}
       <section className="container py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Everything You Need for Success</h2>
+          <h2 className="text-3xl font-bold mb-4">Todo Lo Que Necesitas Para El Éxito</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Our comprehensive platform supports every step of your professional development journey.
+            Nuestra plataforma integral apoya cada paso de tu jornada de desarrollo profesional.
           </p>
         </div>
 
@@ -26,11 +26,11 @@ const Index = () => {
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-primary">
                 <Target className="h-6 w-6 text-primary-foreground" />
               </div>
-              <CardTitle>Find Opportunities</CardTitle>
+              <CardTitle>Encuentra Oportunidades</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Browse hundreds of practice opportunities from top companies and organizations.
+                Explora cientos de oportunidades de práctica de las mejores empresas y organizaciones.
               </p>
             </CardContent>
           </Card>
@@ -40,11 +40,11 @@ const Index = () => {
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-primary">
                 <Users className="h-6 w-6 text-primary-foreground" />
               </div>
-              <CardTitle>Easy Applications</CardTitle>
+              <CardTitle>Aplicaciones Fáciles</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Apply to multiple positions with streamlined forms and track your progress.
+                Aplica a múltiples posiciones con formularios simplificados y rastrea tu progreso.
               </p>
             </CardContent>
           </Card>
@@ -54,11 +54,11 @@ const Index = () => {
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-primary">
                 <Clock className="h-6 w-6 text-primary-foreground" />
               </div>
-              <CardTitle>Track Progress</CardTitle>
+              <CardTitle>Rastrea el Progreso</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Monitor application status and manage your practice timeline effectively.
+                Monitorea el estado de las aplicaciones y gestiona tu cronograma de práctica efectivamente.
               </p>
             </CardContent>
           </Card>
@@ -68,11 +68,11 @@ const Index = () => {
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-primary">
                 <Award className="h-6 w-6 text-primary-foreground" />
               </div>
-              <CardTitle>Document Learning</CardTitle>
+              <CardTitle>Documenta el Aprendizaje</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Keep detailed daily logs of your activities, learnings, and achievements.
+                Mantén registros diarios detallados de tus actividades, aprendizajes y logros.
               </p>
             </CardContent>
           </Card>
@@ -82,20 +82,20 @@ const Index = () => {
       {/* CTA Section */}
       <section className="bg-muted py-16">
         <div className="container text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+          <h2 className="text-3xl font-bold mb-4">¿Listo Para Comenzar Tu Jornada?</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join thousands of students who are building their careers through meaningful practice experiences.
+            Únete a miles de estudiantes que están construyendo sus carreras a través de experiencias de práctica significativas.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button variant="hero" size="lg" asChild>
               <Link to="/practices">
-                Explore Opportunities
+                Explorar Oportunidades
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link to="/dashboard">
-                View Dashboard
+                Ver Panel
               </Link>
             </Button>
           </div>
