@@ -65,7 +65,6 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
       <main className="container py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Panel de Control</h1>
@@ -166,7 +165,15 @@ const Dashboard = () => {
                   {application.status === "accepted" && (
                     <div className="flex gap-2 mt-3">
                       <Button size="sm">Ver Detalles</Button>
-                      <Button variant="outline" size="sm">Iniciar Registros Diarios</Button>
+                        <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          window.location.href = "/logs";
+                        }}
+                        >
+                        Iniciar Registros Diarios
+                        </Button>
                     </div>
                   )}
                 </div>
