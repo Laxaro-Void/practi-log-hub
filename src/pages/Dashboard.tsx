@@ -17,28 +17,28 @@ import {
 const mockApplications = [
   {
     id: "1",
-    title: "Software Development Intern",
+    title: "Practicante de Desarrollo de Software",
     company: "TechCorp Solutions",
-    location: "New York, NY",
-    appliedDate: "Nov 15, 2024",
+    location: "Nueva York, NY",
+    appliedDate: "15 nov, 2024",
     status: "under_review",
     progress: 60,
   },
   {
     id: "2",
-    title: "Digital Marketing Assistant", 
+    title: "Asistente de Marketing Digital", 
     company: "Creative Agency Inc",
-    location: "Remote",
-    appliedDate: "Nov 10, 2024",
+    location: "Remoto",
+    appliedDate: "10 nov, 2024",
     status: "accepted",
     progress: 100,
   },
   {
     id: "3",
-    title: "Business Analyst Trainee",
+    title: "Analista de Negocios en Formación",
     company: "Finance Partners LLC", 
     location: "Chicago, IL",
-    appliedDate: "Nov 8, 2024",
+    appliedDate: "8 nov, 2024",
     status: "rejected",
     progress: 100,
   },
@@ -48,13 +48,13 @@ const Dashboard = () => {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "accepted":
-        return <Badge className="bg-success text-success-foreground"><CheckCircle className="h-3 w-3 mr-1" />Accepted</Badge>;
+        return <Badge className="bg-success text-success-foreground"><CheckCircle className="h-3 w-3 mr-1" />Aceptado</Badge>;
       case "rejected":
-        return <Badge variant="destructive"><XCircle className="h-3 w-3 mr-1" />Rejected</Badge>;
+        return <Badge variant="destructive"><XCircle className="h-3 w-3 mr-1" />Rechazado</Badge>;
       case "under_review":
-        return <Badge className="bg-warning text-warning-foreground"><AlertCircle className="h-3 w-3 mr-1" />Under Review</Badge>;
+        return <Badge className="bg-warning text-warning-foreground"><AlertCircle className="h-3 w-3 mr-1" />En Revisión</Badge>;
       default:
-        return <Badge variant="secondary">Unknown</Badge>;
+        return <Badge variant="secondary">Desconocido</Badge>;
     }
   };
 
@@ -68,8 +68,8 @@ const Dashboard = () => {
       
       <main className="container py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-          <p className="text-muted-foreground">Track your applications and manage your practice journey.</p>
+          <h1 className="text-3xl font-bold mb-2">Panel de Control</h1>
+          <p className="text-muted-foreground">Rastrea tus aplicaciones y gestiona tu jornada de práctica.</p>
         </div>
 
         {/* Stats Cards */}
@@ -78,7 +78,7 @@ const Dashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Total Applications</p>
+                  <p className="text-sm font-medium text-muted-foreground">Aplicaciones Totales</p>
                   <p className="text-2xl font-bold">{totalApplications}</p>
                 </div>
                 <FileText className="h-8 w-8 text-primary" />
@@ -90,7 +90,7 @@ const Dashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Under Review</p>
+                  <p className="text-sm font-medium text-muted-foreground">En Revisión</p>
                   <p className="text-2xl font-bold">{underReviewCount}</p>
                 </div>
                 <Clock className="h-8 w-8 text-warning" />
@@ -102,7 +102,7 @@ const Dashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Accepted</p>
+                  <p className="text-sm font-medium text-muted-foreground">Aceptadas</p>
                   <p className="text-2xl font-bold">{acceptedApplications.length}</p>
                 </div>
                 <CheckCircle className="h-8 w-8 text-success" />
@@ -114,7 +114,7 @@ const Dashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Active Practices</p>
+                  <p className="text-sm font-medium text-muted-foreground">Prácticas Activas</p>
                   <p className="text-2xl font-bold">{acceptedApplications.length}</p>
                 </div>
                 <Building className="h-8 w-8 text-accent" />
@@ -126,7 +126,7 @@ const Dashboard = () => {
         {/* Applications List */}
         <Card>
           <CardHeader>
-            <CardTitle>Your Applications</CardTitle>
+            <CardTitle>Tus Aplicaciones</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -146,7 +146,7 @@ const Dashboard = () => {
                         </div>
                         <div className="flex items-center gap-1">
                           <Calendar className="h-4 w-4" />
-                          Applied {application.appliedDate}
+                          Aplicado {application.appliedDate}
                         </div>
                       </div>
                     </div>
@@ -154,19 +154,19 @@ const Dashboard = () => {
                   </div>
                   
                   {application.status === "under_review" && (
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span>Application Progress</span>
-                        <span>{application.progress}%</span>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-sm">
+                          <span>Progreso de Aplicación</span>
+                          <span>{application.progress}%</span>
+                        </div>
+                        <Progress value={application.progress} className="h-2" />
                       </div>
-                      <Progress value={application.progress} className="h-2" />
-                    </div>
                   )}
                   
                   {application.status === "accepted" && (
                     <div className="flex gap-2 mt-3">
-                      <Button size="sm">View Details</Button>
-                      <Button variant="outline" size="sm">Start Daily Logs</Button>
+                      <Button size="sm">Ver Detalles</Button>
+                      <Button variant="outline" size="sm">Iniciar Registros Diarios</Button>
                     </div>
                   )}
                 </div>
