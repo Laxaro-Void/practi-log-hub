@@ -43,6 +43,19 @@ const PracticeCard = ({
     }
   };
 
+  const getTypeLabel = (type: string) => {
+    switch (type) {
+      case "Full-time":
+        return "Tiempo Completo";
+      case "Part-time":
+        return "Medio Tiempo";
+      case "Remote":
+        return "Remoto";
+      default:
+        return type;
+    }
+  };
+
   return (
     <Card className="h-full shadow-card hover:shadow-elevated transition-shadow">
       <CardHeader>
@@ -54,7 +67,7 @@ const PracticeCard = ({
               <span>{company}</span>
             </div>
           </div>
-          <Badge className={getTypeColor(type)}>{type}</Badge>
+          <Badge className={getTypeColor(type)}>{getTypeLabel(type)}</Badge>
         </div>
       </CardHeader>
 
@@ -73,7 +86,7 @@ const PracticeCard = ({
         <p className="text-sm text-muted-foreground line-clamp-3">{description}</p>
 
         <div className="space-y-2">
-          <h4 className="text-sm font-medium">Key Requirements:</h4>
+          <h4 className="text-sm font-medium">Requisitos Clave:</h4>
           <ul className="text-sm text-muted-foreground">
             {requirements.slice(0, 3).map((req, index) => (
               <li key={index} className="flex items-start gap-2">
@@ -87,15 +100,15 @@ const PracticeCard = ({
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-2 text-muted-foreground">
             <Users className="h-4 w-4" />
-            <span>{spots} spots available</span>
+            <span>{spots} plazas disponibles</span>
           </div>
-          <span className="text-muted-foreground">Deadline: {deadline}</span>
+          <span className="text-muted-foreground">Fecha límite: {deadline}</span>
         </div>
       </CardContent>
 
       <CardFooter>
         <Button onClick={() => onApply(id)} className="w-full">
-          Apply Now
+          Aplicar Ahora
         </Button>
       </CardFooter>
     </Card>

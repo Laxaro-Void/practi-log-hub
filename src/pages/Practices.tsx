@@ -10,146 +10,146 @@ import { useToast } from "@/hooks/use-toast";
 const mockPractices = [
   {
     id: "1",
-    title: "Software Development Intern",
+    title: "Practicante de Desarrollo de Software",
     company: "TechCorp Solutions",
-    location: "New York, NY",
-    duration: "3 months",
+    location: "Nueva York, NY",
+    duration: "3 meses",
     type: "Full-time" as const,
-    description: "Join our dynamic development team and work on cutting-edge web applications using React, Node.js, and cloud technologies.",
-    requirements: ["Computer Science or related field", "Basic knowledge of JavaScript", "Strong problem-solving skills", "Team collaboration experience"],
-    deadline: "Dec 15, 2024",
+    description: "Únete a nuestro equipo dinámico de desarrollo y trabaja en aplicaciones web de vanguardia usando React, Node.js y tecnologías en la nube.",
+    requirements: ["Ciencias de la Computación o campo relacionado", "Conocimientos básicos de JavaScript", "Habilidades sólidas de resolución de problemas", "Experiencia en colaboración en equipo"],
+    deadline: "15 dic, 2024",
     spots: 3,
   },
   {
     id: "2",
-    title: "Digital Marketing Assistant",
+    title: "Asistente de Marketing Digital",
     company: "Creative Agency Inc",
-    location: "Remote",
-    duration: "4 months",
+    location: "Remoto",
+    duration: "4 meses",
     type: "Remote" as const,
-    description: "Support our marketing team in creating compelling digital campaigns, analyzing performance metrics, and managing social media presence.",
-    requirements: ["Marketing or Communications major", "Social media experience", "Analytical mindset", "Creative thinking"],
-    deadline: "Jan 10, 2025",
+    description: "Apoya a nuestro equipo de marketing en la creación de campañas digitales atractivas, análisis de métricas de rendimiento y gestión de presencia en redes sociales.",
+    requirements: ["Especialización en Marketing o Comunicaciones", "Experiencia en redes sociales", "Mentalidad analítica", "Pensamiento creativo"],
+    deadline: "10 ene, 2025",
     spots: 2,
   },
   {
     id: "3",
-    title: "Business Analyst Trainee",
+    title: "Analista de Negocios en Formación",
     company: "Finance Partners LLC",
     location: "Chicago, IL",
-    duration: "6 months",
+    duration: "6 meses",
     type: "Part-time" as const,
-    description: "Learn business analysis methodologies while supporting various client projects and developing analytical reports.",
-    requirements: ["Business Administration background", "Excel proficiency", "Communication skills", "Attention to detail"],
-    deadline: "Dec 20, 2024",
+    description: "Aprende metodologías de análisis de negocios mientras apoyas varios proyectos de clientes y desarrollas reportes analíticos.",
+    requirements: ["Formación en Administración de Empresas", "Competencia en Excel", "Habilidades de comunicación", "Atención al detalle"],
+    deadline: "20 dic, 2024",
     spots: 1,
   },
   {
     id: "4",
-    title: "UX/UI Design Intern",
+    title: "Practicante de Diseño UX/UI",
     company: "DesignStudio Pro",
     location: "San Francisco, CA",
-    duration: "4 months",
+    duration: "4 meses",
     type: "Full-time" as const,
-    description: "Work alongside experienced designers to create user-centered designs for mobile and web applications.",
-    requirements: ["Design or HCI background", "Figma proficiency", "Portfolio required", "User research interest"],
-    deadline: "Jan 5, 2025",
+    description: "Trabaja junto a diseñadores experimentados para crear diseños centrados en el usuario para aplicaciones móviles y web.",
+    requirements: ["Formación en Diseño o HCI", "Competencia en Figma", "Portafolio requerido", "Interés en investigación de usuarios"],
+    deadline: "5 ene, 2025",
     spots: 2,
   },
   {
     id: "5",
-    title: "Data Science Intern",
+    title: "Practicante de Ciencia de Datos",
     company: "Analytics Hub",
-    location: "Remote",
-    duration: "5 months",
+    location: "Remoto",
+    duration: "5 meses",
     type: "Remote" as const,
-    description: "Analyze large datasets, build predictive models, and create data visualizations using Python and machine learning tools.",
-    requirements: ["Statistics or Data Science major", "Python programming", "SQL knowledge", "Machine learning basics"],
-    deadline: "Dec 25, 2024",
+    description: "Analiza grandes conjuntos de datos, construye modelos predictivos y crea visualizaciones de datos usando Python y herramientas de aprendizaje automático.",
+    requirements: ["Especialización en Estadística o Ciencia de Datos", "Programación en Python", "Conocimiento de SQL", "Conceptos básicos de aprendizaje automático"],
+    deadline: "25 dic, 2024",
     spots: 4,
   },
   {
     id: "6",
-    title: "Content Writer Trainee",
+    title: "Redactor de Contenido en Formación",
     company: "Media Collective",
-    location: "Los Angeles, CA",
-    duration: "3 months",
+    location: "Los Ángeles, CA",
+    duration: "3 meses",
     type: "Part-time" as const,
-    description: "Create engaging content for various digital platforms, collaborate with editors, and learn content strategy.",
-    requirements: ["English or Journalism major", "Writing portfolio", "SEO knowledge", "Social media understanding"],
-    deadline: "Jan 15, 2025",
+    description: "Crea contenido atractivo para varias plataformas digitales, colabora con editores y aprende estrategia de contenido.",
+    requirements: ["Especialización en Inglés o Periodismo", "Portafolio de escritura", "Conocimiento de SEO", "Comprensión de redes sociales"],
+    deadline: "15 ene, 2025",
     spots: 3,
   },
   {
     id: "7",
-    title: "Cybersecurity Analyst Intern",
+    title: "Practicante de Analista de Ciberseguridad",
     company: "SecureNet Systems",
     location: "Washington, DC",
-    duration: "6 months",
+    duration: "6 meses",
     type: "Full-time" as const,
-    description: "Learn about network security, threat analysis, and incident response while supporting our security operations team.",
-    requirements: ["Computer Science or Cybersecurity major", "Network fundamentals", "Security interest", "Problem-solving skills"],
-    deadline: "Dec 30, 2024",
+    description: "Aprende sobre seguridad de redes, análisis de amenazas y respuesta a incidentes mientras apoyas nuestro equipo de operaciones de seguridad.",
+    requirements: ["Especialización en Ciencias de la Computación o Ciberseguridad", "Fundamentos de redes", "Interés en seguridad", "Habilidades de resolución de problemas"],
+    deadline: "30 dic, 2024",
     spots: 2,
   },
   {
     id: "8",
-    title: "HR Operations Assistant",
+    title: "Asistente de Operaciones de RRHH",
     company: "People First Inc",
-    location: "Remote",
-    duration: "4 months",
+    location: "Remoto",
+    duration: "4 meses",
     type: "Remote" as const,
-    description: "Support HR processes including recruitment, onboarding, employee relations, and policy development.",
-    requirements: ["HR or Psychology background", "Communication skills", "Organizational abilities", "Confidentiality awareness"],
-    deadline: "Jan 20, 2025",
+    description: "Apoya procesos de RRHH incluyendo reclutamiento, incorporación, relaciones con empleados y desarrollo de políticas.",
+    requirements: ["Formación en RRHH o Psicología", "Habilidades de comunicación", "Capacidades organizacionales", "Conciencia de confidencialidad"],
+    deadline: "20 ene, 2025",
     spots: 1,
   },
   {
     id: "9",
-    title: "Mobile App Developer Intern",
+    title: "Practicante de Desarrollador de Apps Móviles",
     company: "AppCraft Studios",
     location: "Austin, TX",
-    duration: "4 months",
+    duration: "4 meses",
     type: "Full-time" as const,
-    description: "Develop mobile applications for iOS and Android platforms using React Native and native development tools.",
-    requirements: ["Mobile development experience", "React Native or Swift/Kotlin", "App store deployment", "API integration"],
-    deadline: "Dec 18, 2024",
+    description: "Desarrolla aplicaciones móviles para plataformas iOS y Android usando React Native y herramientas de desarrollo nativo.",
+    requirements: ["Experiencia en desarrollo móvil", "React Native o Swift/Kotlin", "Despliegue en app store", "Integración de APIs"],
+    deadline: "18 dic, 2024",
     spots: 2,
   },
   {
     id: "10",
-    title: "Financial Analyst Trainee",
+    title: "Analista Financiero en Formación",
     company: "Investment Group LLC",
     location: "Boston, MA",
-    duration: "5 months",
+    duration: "5 meses",
     type: "Part-time" as const,
-    description: "Assist with financial modeling, market research, and investment analysis while learning from senior analysts.",
-    requirements: ["Finance or Economics major", "Excel advanced skills", "Financial modeling basics", "Analytical thinking"],
-    deadline: "Jan 8, 2025",
+    description: "Asiste con modelado financiero, investigación de mercado y análisis de inversiones mientras aprendes de analistas senior.",
+    requirements: ["Especialización en Finanzas o Economía", "Habilidades avanzadas en Excel", "Conceptos básicos de modelado financiero", "Pensamiento analítico"],
+    deadline: "8 ene, 2025",
     spots: 1,
   },
   {
     id: "11",
-    title: "Cloud Infrastructure Intern",
+    title: "Practicante de Infraestructura en la Nube",
     company: "CloudTech Solutions",
     location: "Seattle, WA",
-    duration: "6 months",
+    duration: "6 meses",
     type: "Full-time" as const,
-    description: "Work with AWS, Azure, and GCP to build and maintain cloud infrastructure for enterprise applications.",
-    requirements: ["Computer Science background", "Cloud platforms knowledge", "Linux familiarity", "Scripting skills"],
-    deadline: "Dec 22, 2024",
+    description: "Trabaja con AWS, Azure y GCP para construir y mantener infraestructura en la nube para aplicaciones empresariales.",
+    requirements: ["Formación en Ciencias de la Computación", "Conocimiento de plataformas en la nube", "Familiaridad con Linux", "Habilidades de scripting"],
+    deadline: "22 dic, 2024",
     spots: 3,
   },
   {
     id: "12",
-    title: "Product Management Trainee",
+    title: "Gerente de Producto en Formación",
     company: "Innovation Labs",
-    location: "Remote",
-    duration: "4 months",
+    location: "Remoto",
+    duration: "4 meses",
     type: "Remote" as const,
-    description: "Learn product development lifecycle, conduct user research, and collaborate with engineering teams on product features.",
-    requirements: ["Business or Engineering background", "Analytical skills", "Communication abilities", "Tech-savvy"],
-    deadline: "Jan 12, 2025",
+    description: "Aprende el ciclo de vida de desarrollo de productos, realiza investigación de usuarios y colabora con equipos de ingeniería en características de productos.",
+    requirements: ["Formación en Negocios o Ingeniería", "Habilidades analíticas", "Capacidades de comunicación", "Conocimientos tecnológicos"],
+    deadline: "12 ene, 2025",
     spots: 2,
   },
 ];
@@ -169,8 +169,8 @@ const Practices = () => {
   const handleApply = (id: string) => {
     const practice = mockPractices.find(p => p.id === id);
     toast({
-      title: "Application Started",
-      description: `Redirecting to application form for ${practice?.title}`,
+      title: "Aplicación Iniciada",
+      description: `Redirigiendo al formulario de aplicación para ${practice?.title}`,
     });
     // Here you would navigate to application form
   };
@@ -181,8 +181,8 @@ const Practices = () => {
       
       <main className="container py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Available Practices</h1>
-          <p className="text-muted-foreground">Discover and apply to practice opportunities that match your interests and skills.</p>
+          <h1 className="text-3xl font-bold mb-2">Prácticas Disponibles</h1>
+          <p className="text-muted-foreground">Descubre y aplica a oportunidades de práctica que coincidan con tus intereses y habilidades.</p>
         </div>
 
         {/* Search and Filter */}
@@ -190,7 +190,7 @@ const Practices = () => {
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
-              placeholder="Search practices or companies..."
+              placeholder="Buscar prácticas o empresas..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -201,13 +201,13 @@ const Practices = () => {
             <Filter className="h-4 w-4 text-muted-foreground" />
             <Select value={typeFilter} onValueChange={setTypeFilter}>
               <SelectTrigger className="w-[140px]">
-                <SelectValue placeholder="Filter by type" />
+                <SelectValue placeholder="Filtrar por tipo" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
-                <SelectItem value="Full-time">Full-time</SelectItem>
-                <SelectItem value="Part-time">Part-time</SelectItem>
-                <SelectItem value="Remote">Remote</SelectItem>
+                <SelectItem value="all">Todos los Tipos</SelectItem>
+                <SelectItem value="Full-time">Tiempo Completo</SelectItem>
+                <SelectItem value="Part-time">Medio Tiempo</SelectItem>
+                <SelectItem value="Remote">Remoto</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -215,7 +215,7 @@ const Practices = () => {
 
         {/* Results */}
         <div className="mb-4 text-sm text-muted-foreground">
-          Showing {filteredPractices.length} of {mockPractices.length} practices
+          Mostrando {filteredPractices.length} de {mockPractices.length} prácticas
         </div>
 
         {/* Practice Cards Grid */}
@@ -231,7 +231,7 @@ const Practices = () => {
 
         {filteredPractices.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No practices found matching your criteria.</p>
+            <p className="text-muted-foreground">No se encontraron prácticas que coincidan con tus criterios.</p>
             <Button
               variant="outline"
               onClick={() => {
@@ -240,7 +240,7 @@ const Practices = () => {
               }}
               className="mt-4"
             >
-              Clear Filters
+              Limpiar Filtros
             </Button>
           </div>
         )}
