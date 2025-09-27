@@ -14,7 +14,7 @@ const Index = () => {
       {/* Features Section */}
       <section className="container py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Hola</h2>
+          <h2 className="text-3xl font-bold mb-4">Todo Lo Que Necesitas Para El Éxito</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Nuestra plataforma integral apoya cada paso de tu jornada de desarrollo profesional.
           </p>
