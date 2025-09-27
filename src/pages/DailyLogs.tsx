@@ -11,11 +11,11 @@ import { Calendar, Plus, FileText, Clock, Building } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const mockPractices = [
-  { id: "1", title: "Practicante de Desarrollo de Software", company: "TechCorp Solutions" },
-  { id: "2", title: "Asistente de Marketing Digital", company: "Creative Agency Inc" },
-  { id: "3", title: "Analista de Negocios en Formación", company: "Finance Partners LLC" },
-  { id: "4", title: "Practicante de Diseño UX/UI", company: "DesignStudio Pro" },
-  { id: "5", title: "Practicante de Ciencia de Datos", company: "Analytics Hub" },
+  { id: "1", title: "Software Development Intern", company: "TechCorp Solutions" },
+  { id: "2", title: "Digital Marketing Assistant", company: "Creative Agency Inc" },
+  { id: "3", title: "Business Analyst Trainee", company: "Finance Partners LLC" },
+  { id: "4", title: "UX/UI Design Intern", company: "DesignStudio Pro" },
+  { id: "5", title: "Data Science Intern", company: "Analytics Hub" },
 ];
 
 const mockLogs = [
@@ -23,44 +23,44 @@ const mockLogs = [
     id: "1",
     date: "2024-11-20",
     practiceId: "1",
-    practice: "Practicante de Desarrollo de Software - TechCorp Solutions",
+    practice: "Software Development Intern - TechCorp Solutions",
     hours: 8,
-    activities: "Trabajé en componentes React para el panel de usuario, participé en reunión diaria, revisé código de desarrolladores senior.",
-    learnings: "Aprendí sobre mejores prácticas de React hooks y cómo optimizar la renderización de componentes.",
-    challenges: "Entender la arquitectura del código existente tomó más tiempo de lo esperado.",
+    activities: "Worked on React components for the user dashboard, participated in daily standup, reviewed code from senior developers.",
+    learnings: "Learned about React hooks best practices and how to optimize component rendering.",
+    challenges: "Understanding the existing codebase architecture took more time than expected.",
     mood: "productive",
   },
   {
     id: "2", 
     date: "2024-11-19",
     practiceId: "1",
-    practice: "Practicante de Desarrollo de Software - TechCorp Solutions",
+    practice: "Software Development Intern - TechCorp Solutions",
     hours: 7.5,
-    activities: "Depuración de problemas de integración de API, asistí a reunión retrospectiva del equipo, configuré entorno de desarrollo.",
-    learnings: "Gané experiencia en depuración de APIs REST y aprendí sobre herramientas de colaboración en equipo.",
-    challenges: "La configuración del entorno tuvo algunos problemas de compatibilidad que requirieron soporte de IT.",
+    activities: "Debugging API integration issues, attending team retrospective meeting, setting up development environment.",
+    learnings: "Gained experience with REST API debugging and learned about team collaboration tools.",
+    challenges: "Environment setup had some compatibility issues that required IT support.",
     mood: "challenging",
   },
   {
     id: "3",
     date: "2024-11-21",
     practiceId: "2",
-    practice: "Asistente de Marketing Digital - Creative Agency Inc",
+    practice: "Digital Marketing Assistant - Creative Agency Inc",
     hours: 6,
-    activities: "Creé calendario de contenido para redes sociales, analicé métricas de rendimiento de campañas, asistí a presentación con cliente.",
-    learnings: "Comprensión de analíticas de redes sociales y cómo interpretar datos de engagement.",
-    challenges: "Los comentarios del cliente requirieron cambios importantes en la estrategia de campaña.",
+    activities: "Created social media content calendar, analyzed campaign performance metrics, attended client presentation.",
+    learnings: "Understanding of social media analytics and how to interpret engagement data.",
+    challenges: "Client feedback required major changes to the campaign strategy.",
     mood: "productive",
   },
   {
     id: "4",
     date: "2024-11-18",
     practiceId: "2",
-    practice: "Asistente de Marketing Digital - Creative Agency Inc",
+    practice: "Digital Marketing Assistant - Creative Agency Inc",
     hours: 7,
-    activities: "Investigué demografía de audiencia objetivo, redacté contenido para blog, coordiné con equipo de diseño.",
-    learnings: "Aprendí sobre segmentación de audiencia y planificación de estrategia de contenido.",
-    challenges: "Equilibrar visión creativa con requerimientos del cliente.",
+    activities: "Researched target audience demographics, drafted blog post content, coordinated with design team.",
+    learnings: "Learned about audience segmentation and content strategy planning.",
+    challenges: "Balancing creative vision with client requirements.",
     mood: "excellent",
   },
 ];
@@ -84,8 +84,8 @@ const DailyLogs = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Registro Diario Guardado",
-      description: "Tu registro diario ha sido grabado exitosamente.",
+      title: "Daily Log Saved",
+      description: "Your daily log has been successfully recorded.",
     });
     setShowForm(false);
     setFormData({
@@ -101,11 +101,11 @@ const DailyLogs = () => {
   const getMoodBadge = (mood: string) => {
     switch (mood) {
       case "productive":
-        return <Badge className="bg-success text-success-foreground">Productivo</Badge>;
+        return <Badge className="bg-success text-success-foreground">Productive</Badge>;
       case "challenging":
-        return <Badge className="bg-warning text-warning-foreground">Desafiante</Badge>;
+        return <Badge className="bg-warning text-warning-foreground">Challenging</Badge>;
       case "excellent":
-        return <Badge className="bg-primary text-primary-foreground">Excelente</Badge>;
+        return <Badge className="bg-primary text-primary-foreground">Excellent</Badge>;
       default:
         return <Badge variant="secondary">{mood}</Badge>;
     }
@@ -117,8 +117,8 @@ const DailyLogs = () => {
       
       <main className="container py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Registros Diarios</h1>
-          <p className="text-muted-foreground">Rastrea tus actividades diarias, aprendizajes y progreso durante tu práctica.</p>
+          <h1 className="text-3xl font-bold mb-2">Daily Logs</h1>
+          <p className="text-muted-foreground">Track your daily activities, learnings, and progress during your practice.</p>
         </div>
 
         {/* Practice Selection */}
@@ -126,13 +126,13 @@ const DailyLogs = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Building className="h-5 w-5" />
-              Seleccionar Práctica
+              Select Practice
             </CardTitle>
           </CardHeader>
           <CardContent>
             <Select value={selectedPractice} onValueChange={setSelectedPractice}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Elige la práctica para ver y agregar registros..." />
+                <SelectValue placeholder="Choose the practice to view and add logs for..." />
               </SelectTrigger>
               <SelectContent className="bg-card border-border z-50">
                 {mockPractices.map((practice) => (
@@ -155,7 +155,7 @@ const DailyLogs = () => {
             </div>
             <Button onClick={() => setShowForm(true)}>
               <Plus className="h-4 w-4 mr-2" />
-              Nueva Entrada de Registro
+              New Log Entry
             </Button>
           </div>
         )}
@@ -163,16 +163,16 @@ const DailyLogs = () => {
         {showForm && selectedPractice && (
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Crear Entrada de Registro Diario</CardTitle>
+              <CardTitle>Create Daily Log Entry</CardTitle>
               <p className="text-sm text-muted-foreground">
-                Agregando registro para: {selectedPracticeInfo?.title} - {selectedPracticeInfo?.company}
+                Adding log for: {selectedPracticeInfo?.title} - {selectedPracticeInfo?.company}
               </p>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="date">Fecha</Label>
+                    <Label htmlFor="date">Date</Label>
                     <Input
                       id="date"
                       type="date"
@@ -182,7 +182,7 @@ const DailyLogs = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="hours">Horas Trabajadas</Label>
+                    <Label htmlFor="hours">Hours Worked</Label>
                     <Input
                       id="hours"
                       type="number"
@@ -198,60 +198,60 @@ const DailyLogs = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="mood">Estado de Ánimo General</Label>
+                  <Label htmlFor="mood">Overall Mood</Label>
                   <Select value={formData.mood} onValueChange={(value) => setFormData({ ...formData, mood: value })}>
                     <SelectTrigger>
-                      <SelectValue placeholder="¿Cómo estuvo tu día?" />
+                      <SelectValue placeholder="How was your day?" />
                     </SelectTrigger>
                     <SelectContent className="bg-card border-border z-50">
-                      <SelectItem value="excellent">Excelente</SelectItem>
-                      <SelectItem value="productive">Productivo</SelectItem>
+                      <SelectItem value="excellent">Excellent</SelectItem>
+                      <SelectItem value="productive">Productive</SelectItem>
                       <SelectItem value="neutral">Neutral</SelectItem>
-                      <SelectItem value="challenging">Desafiante</SelectItem>
-                      <SelectItem value="difficult">Difícil</SelectItem>
+                      <SelectItem value="challenging">Challenging</SelectItem>
+                      <SelectItem value="difficult">Difficult</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="activities">Actividades y Tareas</Label>
+                  <Label htmlFor="activities">Activities & Tasks</Label>
                   <Textarea
                     id="activities"
                     value={formData.activities}
                     onChange={(e) => setFormData({ ...formData, activities: e.target.value })}
-                    placeholder="Describe en qué trabajaste hoy..."
+                    placeholder="Describe what you worked on today..."
                     rows={3}
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="learnings">Aprendizajes Clave</Label>
+                  <Label htmlFor="learnings">Key Learnings</Label>
                   <Textarea
                     id="learnings"
                     value={formData.learnings}
                     onChange={(e) => setFormData({ ...formData, learnings: e.target.value })}
-                    placeholder="¿Qué aprendiste hoy?"
+                    placeholder="What did you learn today?"
                     rows={3}
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="challenges">Desafíos y Soluciones</Label>
+                  <Label htmlFor="challenges">Challenges & Solutions</Label>
                   <Textarea
                     id="challenges"
                     value={formData.challenges}
                     onChange={(e) => setFormData({ ...formData, challenges: e.target.value })}
-                    placeholder="¿Algún desafío que enfrentaste y cómo lo abordaste?"
+                    placeholder="Any challenges you faced and how you addressed them?"
                     rows={3}
                   />
                 </div>
 
                 <div className="flex gap-4">
-                  <Button type="submit">Guardar Entrada de Registro</Button>
+                  <Button type="submit">Save Log Entry</Button>
                   <Button type="button" variant="outline" onClick={() => setShowForm(false)}>
-                    Cancelar
+                    Cancel
                   </Button>
                 </div>
               </form>
@@ -263,9 +263,9 @@ const DailyLogs = () => {
         {selectedPractice && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold">Historial de Registros</h3>
+              <h3 className="text-lg font-semibold">Log History</h3>
               <span className="text-sm text-muted-foreground">
-                {filteredLogs.length} {filteredLogs.length === 1 ? 'entrada' : 'entradas'}
+                {filteredLogs.length} {filteredLogs.length === 1 ? 'entry' : 'entries'}
               </span>
             </div>
             
@@ -281,7 +281,7 @@ const DailyLogs = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm text-muted-foreground">{log.hours} horas</span>
+                        <span className="text-sm text-muted-foreground">{log.hours} hours</span>
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground">{log.practice}</p>
@@ -291,18 +291,18 @@ const DailyLogs = () => {
 
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-medium text-sm text-muted-foreground mb-1">Actividades y Tareas</h4>
+                    <h4 className="font-medium text-sm text-muted-foreground mb-1">Activities & Tasks</h4>
                     <p className="text-sm">{log.activities}</p>
                   </div>
                   
                   <div>
-                    <h4 className="font-medium text-sm text-muted-foreground mb-1">Aprendizajes Clave</h4>
+                    <h4 className="font-medium text-sm text-muted-foreground mb-1">Key Learnings</h4>
                     <p className="text-sm">{log.learnings}</p>
                   </div>
                   
                   {log.challenges && (
                     <div>
-                      <h4 className="font-medium text-sm text-muted-foreground mb-1">Desafíos y Soluciones</h4>
+                      <h4 className="font-medium text-sm text-muted-foreground mb-1">Challenges & Solutions</h4>
                       <p className="text-sm">{log.challenges}</p>
                     </div>
                   )}
@@ -315,10 +315,10 @@ const DailyLogs = () => {
               <Card>
                 <CardContent className="text-center py-12">
                   <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground mb-4">No hay registros diarios grabados para esta práctica aún.</p>
+                  <p className="text-muted-foreground mb-4">No daily logs recorded for this practice yet.</p>
                   <Button onClick={() => setShowForm(true)}>
                     <Plus className="h-4 w-4 mr-2" />
-                    Crear Tu Primera Entrada de Registro
+                    Create Your First Log Entry
                   </Button>
                 </CardContent>
               </Card>
@@ -330,7 +330,7 @@ const DailyLogs = () => {
           <Card>
             <CardContent className="text-center py-12">
               <Building className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Por favor selecciona una práctica arriba para ver y gestionar tus registros diarios.</p>
+              <p className="text-muted-foreground">Please select a practice above to view and manage your daily logs.</p>
             </CardContent>
           </Card>
         )}
