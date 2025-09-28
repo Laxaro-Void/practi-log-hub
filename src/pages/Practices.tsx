@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import PracticeCard from "@/components/PracticeCard";
+import ApplicationForm from "@/components/ApplicationForm";
 import Header from "@/components/Header";
 import { Search, Filter } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -157,6 +158,8 @@ const mockPractices = [
 const Practices = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [selectedPractice, setSelectedPractice] = useState<typeof mockPractices[0] | null>(null);
+  const [isApplicationFormOpen, setIsApplicationFormOpen] = useState(false);
   const { toast } = useToast();
 
   const filteredPractices = mockPractices.filter((practice) => {
@@ -168,11 +171,15 @@ const Practices = () => {
 
   const handleApply = (id: string) => {
     const practice = mockPractices.find(p => p.id === id);
-    toast({
-      title: "Aplicación Iniciada",
-      description: `Redirigiendo al formulario de aplicación para ${practice?.title}`,
-    });
-    // Here you would navigate to application form
+    if (practice) {
+      setSelectedPractice(practice);
+      setIsApplicationFormOpen(true);
+    }
+  };
+
+  const handleCloseApplicationForm = () => {
+    setIsApplicationFormOpen(false);
+    setSelectedPractice(null);
   };
 
   return (
@@ -245,6 +252,13 @@ const Practices = () => {
           </div>
         )}
       </main>
+
+      {/* Application Form Modal */}
+      <ApplicationForm
+        practice={selectedPractice}
+        isOpen={isApplicationFormOpen}
+        onClose={handleCloseApplicationForm}
+      />
     </div>
   );
 };
