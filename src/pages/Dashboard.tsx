@@ -13,38 +13,10 @@ import {
   Building,
   MapPin
 } from "lucide-react";
-
-const mockApplications = [
-  {
-    id: "1",
-    title: "Practicante de Desarrollo de Software",
-    company: "TechCorp Solutions",
-    location: "Nueva York, NY",
-    appliedDate: "15 nov, 2024",
-    status: "under_review",
-    progress: 60,
-  },
-  {
-    id: "2",
-    title: "Asistente de Marketing Digital", 
-    company: "Creative Agency Inc",
-    location: "Remoto",
-    appliedDate: "10 nov, 2024",
-    status: "accepted",
-    progress: 100,
-  },
-  {
-    id: "3",
-    title: "Analista de Negocios en Formación",
-    company: "Finance Partners LLC", 
-    location: "Chicago, IL",
-    appliedDate: "8 nov, 2024",
-    status: "rejected",
-    progress: 100,
-  },
-];
+import { useApplications } from "@/contexts/ApplicationContext";
 
 const Dashboard = () => {
+  const { applications } = useApplications();
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "accepted":
@@ -58,9 +30,9 @@ const Dashboard = () => {
     }
   };
 
-  const acceptedApplications = mockApplications.filter(app => app.status === "accepted");
-  const underReviewCount = mockApplications.filter(app => app.status === "under_review").length;
-  const totalApplications = mockApplications.length;
+  const acceptedApplications = applications.filter(app => app.status === "accepted");
+  const underReviewCount = applications.filter(app => app.status === "under_review").length;
+  const totalApplications = applications.length;
 
   return (
     <div className="min-h-screen bg-background">
@@ -129,7 +101,7 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {mockApplications.map((application) => (
+              {applications.map((application) => (
                 <div key={application.id} className="border rounded-lg p-4 hover:shadow-card transition-shadow">
                   <div className="flex items-start justify-between mb-3">
                     <div>

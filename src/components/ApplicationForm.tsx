@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Building, MapPin, Clock, Users, Upload, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useApplications } from "@/contexts/ApplicationContext";
 
 interface Practice {
   id: string;
@@ -47,6 +48,7 @@ interface FormData {
 
 const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) => {
   const { toast } = useToast();
+  const { addApplication } = useApplications();
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -85,6 +87,15 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
     
     // Simular envío
     setTimeout(() => {
+      // Agregar aplicación al contexto
+      if (practice) {
+        addApplication({
+          title: practice.title,
+          company: practice.company,
+          location: practice.location,
+        });
+      }
+
       toast({
         title: "¡Aplicación Enviada!",
         description: `Tu aplicación para ${practice?.title} ha sido enviada exitosamente. Te contactaremos pronto.`,
