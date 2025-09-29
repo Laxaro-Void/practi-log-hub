@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { applications as initialApplications } from "@/pages/Practices/data.json";
 
 interface Application {
@@ -19,17 +19,35 @@ interface ApplicationContextType {
 const ApplicationContext = createContext<ApplicationContextType | undefined>(undefined);
 
 export const ApplicationProvider = ({ children }: { children: ReactNode }) => {
-  const [applications, setApplications] = useState<Application[]>(
-    initialApplications.map(app => ({
-      ...app,
-      status: app.status as "under_review" | "accepted" | "rejected"
-    }))
-  );
+  const [applications, setApplications] = useState<Application[]>([]);
+
+  // Load applications from localStorage on mount
+  useEffect(() => {
+    const savedApplications = localStorage.getItem('practiceApplications');
+    if (savedApplications) {
+      setApplications(JSON.parse(savedApplications));
+    } else {
+      // Initialize with data from JSON if no saved data
+      const initialApps = initialApplications.map(app => ({
+        ...app,
+        status: app.status as "under_review" | "accepted" | "rejected"
+      }));
+      setApplications(initialApps);
+      localStorage.setItem('practiceApplications', JSON.stringify(initialApps));
+    }
+  }, []);
+
+  // Save to localStorage whenever applications change
+  useEffect(() => {
+    if (applications.length > 0) {
+      localStorage.setItem('practiceApplications', JSON.stringify(applications));
+    }
+  }, [applications]);
 
   const addApplication = (newApplication: Omit<Application, "id" | "appliedDate" | "status" | "progress">) => {
     const application: Application = {
       ...newApplication,
-      id: (applications.length + 1).toString(),
+      id: Date.now().toString(), // Use timestamp for unique ID
       appliedDate: new Date().toLocaleDateString("es-ES", { 
         day: "numeric", 
         month: "short", 
