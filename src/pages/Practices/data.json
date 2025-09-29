@@ -153,7 +153,7 @@
             "location": "Nueva York, NY",
             "appliedDate": "15 nov, 2024",
             "status": "under_review",
-            "progress": 60,
+            "progress": 60
         },
         {
             "id": "2",
@@ -162,7 +162,7 @@
             "location": "Remoto",
             "appliedDate": "10 nov, 2024",
             "status": "accepted",
-            "progress": 100,
+            "progress": 100
         },
         {
             "id": "3",
@@ -171,7 +171,7 @@
             "location": "Chicago, IL",
             "appliedDate": "8 nov, 2024",
             "status": "rejected",
-            "progress": 100,
+            "progress": 100
         }
     ],
     "acceptedPractices": [
