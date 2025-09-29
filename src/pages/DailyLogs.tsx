@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Plus, FileText, Clock, Building } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useApplications } from "@/contexts/ApplicationContext";
 
 const mockPractices = [
   { id: "1", title: "Practicante de Desarrollo de Software", company: "TechCorp Solutions" },
@@ -66,6 +67,7 @@ const mockLogs = [
 ];
 
 const DailyLogs = () => {
+  const { applications } = useApplications();
   const [selectedPractice, setSelectedPractice] = useState<string>("");
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -78,7 +80,20 @@ const DailyLogs = () => {
   });
   const { toast } = useToast();
 
-  const selectedPracticeInfo = mockPractices.find(p => p.id === selectedPractice);
+  // Load selected practice from localStorage on mount
+  useEffect(() => {
+    const savedPractice = localStorage.getItem('selectedPractice');
+    if (savedPractice) {
+      const practiceData = JSON.parse(savedPractice);
+      setSelectedPractice(practiceData.id);
+      localStorage.removeItem('selectedPractice'); // Clear after use
+    }
+  }, []);
+
+  // Get accepted applications for practice selection
+  const acceptedApplications = applications.filter(app => app.status === "accepted");
+  
+  const selectedPracticeInfo = acceptedApplications.find(p => p.id === selectedPractice);
   const filteredLogs = mockLogs.filter(log => log.practiceId === selectedPractice);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -135,7 +150,7 @@ const DailyLogs = () => {
                 <SelectValue placeholder="Elige la práctica para ver y agregar registros..." />
               </SelectTrigger>
               <SelectContent className="bg-card border-border z-50">
-                {mockPractices.map((practice) => (
+                {acceptedApplications.map((practice) => (
                   <SelectItem key={practice.id} value={practice.id}>
                     {practice.title} - {practice.company}
                   </SelectItem>

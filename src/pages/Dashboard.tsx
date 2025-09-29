@@ -14,9 +14,11 @@ import {
   MapPin
 } from "lucide-react";
 import { useApplications } from "@/contexts/ApplicationContext";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { applications } = useApplications();
+  const navigate = useNavigate();
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "accepted":
@@ -137,11 +139,16 @@ const Dashboard = () => {
                   {application.status === "accepted" && (
                     <div className="flex gap-2 mt-3">
                       <Button size="sm">Ver Detalles</Button>
-                        <Button
+                      <Button
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          window.location.href = "/logs";
+                          localStorage.setItem('selectedPractice', JSON.stringify({
+                            id: application.id,
+                            title: application.title,
+                            company: application.company
+                          }));
+                          navigate("/logs");
                         }}
                         >
                         Iniciar Registros Diarios
