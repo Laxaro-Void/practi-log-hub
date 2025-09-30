@@ -65,6 +65,7 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
     linkedinUrl: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
 
   const handleInputChange = (field: keyof FormData, value: string | Date | undefined) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -83,6 +84,11 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
       return;
     }
 
+    // Mostrar resumen
+    setShowSummary(true);
+  };
+
+  const handleConfirmSubmit = async () => {
     setIsSubmitting(true);
     
     // Simular envío
@@ -101,6 +107,7 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
         description: `Tu aplicación para ${practice?.title} ha sido enviada exitosamente. Te contactaremos pronto.`,
       });
       setIsSubmitting(false);
+      setShowSummary(false);
       onClose();
       // Reset form
       setFormData({
@@ -117,6 +124,10 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
         linkedinUrl: "",
       });
     }, 2000);
+  };
+
+  const handleEditForm = () => {
+    setShowSummary(false);
   };
 
   const getTypeColor = (type: string) => {
@@ -151,9 +162,11 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Aplicar a Práctica</DialogTitle>
+          <DialogTitle>{showSummary ? "Resumen de tu Aplicación" : "Aplicar a Práctica"}</DialogTitle>
           <DialogDescription>
-            Completa el formulario para aplicar a esta oportunidad de práctica.
+            {showSummary 
+              ? "Revisa tu información antes de enviar la aplicación." 
+              : "Completa el formulario para aplicar a esta oportunidad de práctica."}
           </DialogDescription>
         </DialogHeader>
 
@@ -189,7 +202,118 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
           </CardContent>
         </Card>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        {showSummary ? (
+          /* Application Summary */
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Información Personal</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Nombre Completo</p>
+                    <p className="font-medium">{formData.fullName}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Correo Electrónico</p>
+                    <p className="font-medium">{formData.email}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Teléfono</p>
+                    <p className="font-medium">{formData.phone}</p>
+                  </div>
+                  {formData.linkedinUrl && (
+                    <div>
+                      <p className="text-sm text-muted-foreground">LinkedIn</p>
+                      <p className="font-medium truncate">{formData.linkedinUrl}</p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {(formData.major || formData.graduationYear) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">Información Académica</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="grid grid-cols-2 gap-4">
+                    {formData.major && (
+                      <div>
+                        <p className="text-sm text-muted-foreground">Carrera</p>
+                        <p className="font-medium">{formData.major}</p>
+                      </div>
+                    )}
+                    {formData.graduationYear && (
+                      <div>
+                        <p className="text-sm text-muted-foreground">Año de Graduación</p>
+                        <p className="font-medium">{formData.graduationYear}</p>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {(formData.experience || formData.skills || formData.portfolioUrl) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">Experiencia y Habilidades</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {formData.experience && (
+                    <div>
+                      <p className="text-sm text-muted-foreground">Experiencia Previa</p>
+                      <p className="font-medium whitespace-pre-wrap">{formData.experience}</p>
+                    </div>
+                  )}
+                  {formData.skills && (
+                    <div>
+                      <p className="text-sm text-muted-foreground">Habilidades Técnicas</p>
+                      <p className="font-medium whitespace-pre-wrap">{formData.skills}</p>
+                    </div>
+                  )}
+                  {formData.portfolioUrl && (
+                    <div>
+                      <p className="text-sm text-muted-foreground">Portfolio/GitHub</p>
+                      <p className="font-medium truncate">{formData.portfolioUrl}</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            )}
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Motivación y Disponibilidad</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div>
+                  <p className="text-sm text-muted-foreground">Motivación</p>
+                  <p className="font-medium whitespace-pre-wrap">{formData.motivation}</p>
+                </div>
+                {formData.availability && (
+                  <div>
+                    <p className="text-sm text-muted-foreground">Disponibilidad</p>
+                    <p className="font-medium">{format(formData.availability, "PPP")}</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            <div className="flex justify-end gap-4 pt-6 border-t">
+              <Button type="button" variant="outline" onClick={handleEditForm}>
+                Editar Formulario
+              </Button>
+              <Button type="button" onClick={handleConfirmSubmit} disabled={isSubmitting}>
+                {isSubmitting ? "Enviando..." : "Confirmar Envío"}
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
           {/* Información Personal */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Información Personal</h3>
@@ -366,16 +490,17 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
             </div>
           </div>
 
-          {/* Botones de Acción */}
-          <div className="flex justify-end gap-4 pt-6 border-t">
-            <Button type="button" variant="outline" onClick={onClose}>
-              Cancelar
-            </Button>
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Enviando..." : "Enviar Aplicación"}
-            </Button>
-          </div>
-        </form>
+            {/* Botones de Acción */}
+            <div className="flex justify-end gap-4 pt-6 border-t">
+              <Button type="button" variant="outline" onClick={onClose}>
+                Cancelar
+              </Button>
+              <Button type="submit">
+                Revisar Aplicación
+              </Button>
+            </div>
+          </form>
+        )}
       </DialogContent>
     </Dialog>
   );
