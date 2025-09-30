@@ -38,10 +38,8 @@ interface FormData {
   fullName: string;
   email: string;
   phone: string;
-  university: string;
   major: string;
   graduationYear: string;
-  gpa: string;
   experience: string;
   motivation: string;
   skills: string;
@@ -57,10 +55,8 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
     fullName: "",
     email: "",
     phone: "",
-    university: "",
     major: "",
     graduationYear: "",
-    gpa: "",
     experience: "",
     motivation: "",
     skills: "",
@@ -111,10 +107,8 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
         fullName: "",
         email: "",
         phone: "",
-        university: "",
         major: "",
         graduationYear: "",
-        gpa: "",
         experience: "",
         motivation: "",
         skills: "",
@@ -248,15 +242,6 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
             <h3 className="text-lg font-semibold">Información Académica</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="university">Universidad</Label>
-                <Input
-                  id="university"
-                  value={formData.university}
-                  onChange={(e) => handleInputChange("university", e.target.value)}
-                  placeholder="Nombre de tu universidad"
-                />
-              </div>
-              <div className="space-y-2">
                 <Label htmlFor="major">Carrera</Label>
                 <Input
                   id="major"
@@ -279,15 +264,6 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
                     <SelectItem value="2028">2028</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="gpa">GPA/Promedio</Label>
-                <Input
-                  id="gpa"
-                  value={formData.gpa}
-                  onChange={(e) => handleInputChange("gpa", e.target.value)}
-                  placeholder="3.5 / 4.0"
-                />
               </div>
             </div>
           </div>
