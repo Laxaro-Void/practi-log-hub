@@ -14,7 +14,7 @@
         },
         {
             "id": "2",
-            "title": "Asistente de Marketing Digital",
+            "title": "Practicante de Diseño UX/UI",
             "company": "Creative Agency Inc",
             "location": "Remoto",
             "duration": "4 meses",
@@ -151,16 +151,16 @@
             "title": "Practicante de Desarrollo de Software",
             "company": "TechCorp Solutions",
             "location": "Nueva York, NY",
-            "appliedDate": "15 nov, 2024",
-            "status": "under_review",
+            "appliedDate": "20 sep, 2025",
+            "status": "rejected",
             "progress": 60
         },
         {
             "id": "2",
-            "title": "Asistente de Marketing Digital", 
+            "title": "Practicante de Diseño UX/UI", 
             "company": "Creative Agency Inc",
             "location": "Remoto",
-            "appliedDate": "10 nov, 2024",
+            "appliedDate": "15 dic, 2025",
             "status": "accepted",
             "progress": 100
         },
@@ -169,7 +169,7 @@
             "title": "Analista de Negocios en Formación",
             "company": "Finance Partners LLC",
             "location": "Chicago, IL",
-            "appliedDate": "8 nov, 2024",
+            "appliedDate": "8 nov, 2025",
             "status": "rejected",
             "progress": 100
         }
@@ -177,7 +177,7 @@
     "acceptedPractices": [
         {
             "id": "2",
-            "title": "Asistente de Marketing Digital", 
+            "title": "Practicante de Diseño UX/UI", 
             "company": "Creative Agency Inc",
             "location": "Remoto",
             "startDate": "1 feb, 2025",
@@ -187,14 +187,20 @@
             "DaylyLogs": [
                 {
                     "date": "1 feb, 2025",
-                    "tasks": "Introducción a la empresa y al equipo. Configuración de cuentas de redes sociales.",
+                    "tasks": "Introducción a la empresa y al equipo.",
                     "hours": 4,
                     "status": "submitted"
                 },
                 {
                     "date": "2 feb, 2025",
-                    "tasks": "Investigación de mercado para la próxima campaña. Análisis de competidores.",
-                    "hours": 5,
+                    "tasks": "Introducción al proyecto en desarrollo",
+                    "hours": 6,
+                    "status": "pending"
+                },
+                {
+                    "date": "3 feb, 2025",
+                    "tasks": "Lluvias de ideas y planificación",
+                    "hours": 6,
                     "status": "pending"
                 }
             ]
