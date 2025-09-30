@@ -7,9 +7,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Building, MapPin, Clock, Users, Upload, X } from "lucide-react";
+import { Building, MapPin, Clock, Users, Upload, X, CalendarIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useApplications } from "@/contexts/ApplicationContext";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 interface Practice {
   id: string;
@@ -36,7 +40,7 @@ interface FormData {
   phone: string;
   university: string;
   major: string;
-  graduationYear: string;
+  graduationYear: Date | undefined;
   gpa: string;
   experience: string;
   motivation: string;
@@ -55,7 +59,7 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
     phone: "",
     university: "",
     major: "",
-    graduationYear: "",
+    graduationYear: undefined,
     gpa: "",
     experience: "",
     motivation: "",
@@ -66,7 +70,7 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = (field: keyof FormData, value: string | Date | undefined) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -109,7 +113,7 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
         phone: "",
         university: "",
         major: "",
-        graduationYear: "",
+        graduationYear: undefined,
         gpa: "",
         experience: "",
         motivation: "",
@@ -262,19 +266,30 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="graduationYear">Año de Graduación</Label>
-                <Select value={formData.graduationYear} onValueChange={(value) => handleInputChange("graduationYear", value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona año" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="2024">2024</SelectItem>
-                    <SelectItem value="2025">2025</SelectItem>
-                    <SelectItem value="2026">2026</SelectItem>
-                    <SelectItem value="2027">2027</SelectItem>
-                    <SelectItem value="2028">2028</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="graduationYear">Fecha de Graduación</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !formData.graduationYear && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {formData.graduationYear ? format(formData.graduationYear, "PPP") : <span>Selecciona fecha</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={formData.graduationYear}
+                      onSelect={(date) => handleInputChange("graduationYear", date)}
+                      initialFocus
+                      className="pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="gpa">GPA/Promedio</Label>
