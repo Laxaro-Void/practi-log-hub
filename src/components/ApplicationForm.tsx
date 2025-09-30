@@ -7,9 +7,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Building, MapPin, Clock, Users, Upload, X } from "lucide-react";
+import { Building, MapPin, Clock, Users, Upload, X, CalendarIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useApplications } from "@/contexts/ApplicationContext";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 interface Practice {
   id: string;
@@ -41,7 +45,7 @@ interface FormData {
   experience: string;
   motivation: string;
   skills: string;
-  availability: string;
+  availability: Date | undefined;
   portfolioUrl: string;
   linkedinUrl: string;
 }
@@ -60,13 +64,13 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
     experience: "",
     motivation: "",
     skills: "",
-    availability: "",
+    availability: undefined,
     portfolioUrl: "",
     linkedinUrl: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = (field: keyof FormData, value: string | Date | undefined) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -114,7 +118,7 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
         experience: "",
         motivation: "",
         skills: "",
-        availability: "",
+        availability: undefined,
         portfolioUrl: "",
         linkedinUrl: "",
       });
@@ -340,20 +344,31 @@ const ApplicationForm = ({ practice, isOpen, onClose }: ApplicationFormProps) =>
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="availability">Disponibilidad</Label>
-                <Select value={formData.availability} onValueChange={(value) => handleInputChange("availability", value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="¿Cuándo puedes empezar?" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="inmediato">Inmediatamente</SelectItem>
-                    <SelectItem value="1semana">En 1 semana</SelectItem>
-                    <SelectItem value="2semanas">En 2 semanas</SelectItem>
-                    <SelectItem value="1mes">En 1 mes</SelectItem>
-                    <SelectItem value="2meses">En 2 meses</SelectItem>
-                  </SelectContent>
-                  
-                </Select>
+                <Label htmlFor="availability">¿Cuándo puedes empezar?</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !formData.availability && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {formData.availability ? format(formData.availability, "PPP") : <span>Selecciona una fecha</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={formData.availability}
+                      onSelect={(date) => handleInputChange("availability", date)}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                      className={cn("p-3 pointer-events-auto")}
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
           </div>
