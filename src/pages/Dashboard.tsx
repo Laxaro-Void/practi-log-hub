@@ -29,6 +29,7 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState<string>("date");
   const [selectedApplication, setSelectedApplication] = useState<string | null>(null);
   const [showDetailsDialog, setShowDetailsDialog] = useState(false);
+  const [expandedApplication, setExpandedApplication] = useState<string | null>(null);
 
   const sortedApplications = useMemo(() => {
     const sorted = [...applications];
@@ -167,7 +168,11 @@ const Dashboard = () => {
           <CardContent>
             <div className="space-y-4">
               {sortedApplications.map((application) => (
-                <div key={application.id} className="border rounded-lg p-4 hover:shadow-card transition-shadow">
+                <div 
+                  key={application.id} 
+                  className="border rounded-lg p-4 hover:shadow-card transition-shadow cursor-pointer"
+                  onClick={() => setExpandedApplication(expandedApplication === application.id ? null : application.id)}
+                >
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <h3 className="font-semibold text-lg">{application.title}</h3>
@@ -189,58 +194,72 @@ const Dashboard = () => {
                     {getStatusBadge(application.status)}
                   </div>
                   
-                  {application.status === "under_review" && (
-                    <>
-                      <div className="space-y-2 mb-3">
-                        <div className="flex items-center justify-between text-sm">
-                          <span>Progreso de Aplicación</span>
-                          <span>{application.progress}%</span>
-                        </div>
-                        <Progress value={application.progress} className="h-2" />
+                  {application.status === "under_review" && expandedApplication !== application.id && (
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <span>Progreso de Aplicación</span>
+                        <span>{application.progress}%</span>
                       </div>
-                      <div className="flex gap-2">
-                        <Button size="sm" onClick={() => handleViewDetails(application.id)}>
-                          Ver Detalles
-                        </Button>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => handleCancelApplication(application.id)}
-                        >
-                          Cancelar Aplicación
-                        </Button>
-                      </div>
-                    </>
-                  )}
-                  
-                  {application.status === "accepted" && (
-                    <div className="flex gap-2 mt-3">
-                      <Button size="sm" onClick={() => handleViewDetails(application.id)}>
-                        Ver Detalles
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          localStorage.setItem('selectedPractice', JSON.stringify({
-                            id: application.id,
-                            title: application.title,
-                            company: application.company
-                          }));
-                          navigate("/logs");
-                        }}
-                      >
-                        Iniciar Registros Diarios
-                      </Button>
+                      <Progress value={application.progress} className="h-2" />
                     </div>
                   )}
 
-                  {application.status === "rejected" && (
-                    <div className="mt-3">
-                      <Button size="sm" variant="outline" onClick={() => handleViewDetails(application.id)}>
-                        Ver Detalles
-                      </Button>
-                    </div>
+                  {expandedApplication === application.id && (
+                    <>
+                      {application.status === "under_review" && (
+                        <>
+                          <div className="space-y-2 mb-3">
+                            <div className="flex items-center justify-between text-sm">
+                              <span>Progreso de Aplicación</span>
+                              <span>{application.progress}%</span>
+                            </div>
+                            <Progress value={application.progress} className="h-2" />
+                          </div>
+                          <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+                            <Button size="sm" onClick={() => handleViewDetails(application.id)}>
+                              Ver Detalles
+                            </Button>
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => handleCancelApplication(application.id)}
+                            >
+                              Cancelar Aplicación
+                            </Button>
+                          </div>
+                        </>
+                      )}
+                      
+                      {application.status === "accepted" && (
+                        <div className="flex gap-2 mt-3" onClick={(e) => e.stopPropagation()}>
+                          <Button size="sm" onClick={() => handleViewDetails(application.id)}>
+                            Ver Detalles
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              localStorage.setItem('selectedPractice', JSON.stringify({
+                                id: application.id,
+                                title: application.title,
+                                company: application.company
+                              }));
+                              navigate("/logs");
+                            }}
+                          >
+                            Iniciar Registros Diarios
+                          </Button>
+                        </div>
+                      )}
+
+                      {application.status === "rejected" && (
+                        <div className="mt-3" onClick={(e) => e.stopPropagation()}>
+                          <Button size="sm" variant="outline" onClick={() => handleViewDetails(application.id)}>
+                            Ver Detalles
+                          </Button>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               ))}
