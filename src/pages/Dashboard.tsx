@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { 
   FileText, 
   Clock, 
@@ -13,16 +14,21 @@ import {
   Calendar,
   Building,
   MapPin,
-  ArrowUpDown
+  ArrowUpDown,
+  Briefcase,
+  Users
 } from "lucide-react";
 import { useApplications } from "@/contexts/ApplicationContext";
 import { useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
+import { practices } from "@/pages/Practices/data.json";
 
 const Dashboard = () => {
   const { applications } = useApplications();
   const navigate = useNavigate();
   const [sortBy, setSortBy] = useState<string>("date");
+  const [selectedApplication, setSelectedApplication] = useState<string | null>(null);
+  const [showDetailsDialog, setShowDetailsDialog] = useState(false);
 
   const sortedApplications = useMemo(() => {
     const sorted = [...applications];
@@ -60,6 +66,23 @@ const Dashboard = () => {
   const acceptedApplications = applications.filter(app => app.status === "accepted");
   const underReviewCount = applications.filter(app => app.status === "under_review").length;
   const totalApplications = applications.length;
+
+  const handleViewDetails = (applicationId: string) => {
+    setSelectedApplication(applicationId);
+    setShowDetailsDialog(true);
+  };
+
+  const handleCancelApplication = (applicationId: string) => {
+    // TODO: Implementar lógica para cancelar aplicación
+    console.log("Cancelar aplicación:", applicationId);
+  };
+
+  const selectedPracticeDetails = useMemo(() => {
+    if (!selectedApplication) return null;
+    const app = applications.find(a => a.id === selectedApplication);
+    if (!app) return null;
+    return practices.find(p => p.id === app.id);
+  }, [selectedApplication, applications]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -167,18 +190,34 @@ const Dashboard = () => {
                   </div>
                   
                   {application.status === "under_review" && (
-                      <div className="space-y-2">
+                    <>
+                      <div className="space-y-2 mb-3">
                         <div className="flex items-center justify-between text-sm">
                           <span>Progreso de Aplicación</span>
                           <span>{application.progress}%</span>
                         </div>
                         <Progress value={application.progress} className="h-2" />
                       </div>
+                      <div className="flex gap-2">
+                        <Button size="sm" onClick={() => handleViewDetails(application.id)}>
+                          Ver Detalles
+                        </Button>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => handleCancelApplication(application.id)}
+                        >
+                          Cancelar Aplicación
+                        </Button>
+                      </div>
+                    </>
                   )}
                   
                   {application.status === "accepted" && (
                     <div className="flex gap-2 mt-3">
-                      <Button size="sm">Ver Detalles</Button>
+                      <Button size="sm" onClick={() => handleViewDetails(application.id)}>
+                        Ver Detalles
+                      </Button>
                       <Button
                         variant="outline"
                         size="sm"
@@ -190,9 +229,17 @@ const Dashboard = () => {
                           }));
                           navigate("/logs");
                         }}
-                        >
+                      >
                         Iniciar Registros Diarios
-                        </Button>
+                      </Button>
+                    </div>
+                  )}
+
+                  {application.status === "rejected" && (
+                    <div className="mt-3">
+                      <Button size="sm" variant="outline" onClick={() => handleViewDetails(application.id)}>
+                        Ver Detalles
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -200,6 +247,89 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Details Dialog */}
+        <Dialog open={showDetailsDialog} onOpenChange={setShowDetailsDialog}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Detalles de la Práctica</DialogTitle>
+              <DialogDescription>
+                Información completa sobre esta oportunidad de práctica
+              </DialogDescription>
+            </DialogHeader>
+            {selectedPracticeDetails && (
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-xl font-semibold">{selectedPracticeDetails.title}</h3>
+                  <p className="text-muted-foreground">{selectedPracticeDetails.company}</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-start gap-2">
+                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium text-sm">Ubicación</p>
+                      <p className="text-sm text-muted-foreground">{selectedPracticeDetails.location}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2">
+                    <Building className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium text-sm">Empresa</p>
+                      <p className="text-sm text-muted-foreground">{selectedPracticeDetails.company}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2">
+                    <Clock className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium text-sm">Duración</p>
+                      <p className="text-sm text-muted-foreground">{selectedPracticeDetails.duration}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2">
+                    <Briefcase className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium text-sm">Tipo</p>
+                      <p className="text-sm text-muted-foreground">{selectedPracticeDetails.type}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-medium mb-2">Descripción</p>
+                  <p className="text-sm text-muted-foreground">{selectedPracticeDetails.description}</p>
+                </div>
+
+                <div>
+                  <p className="font-medium mb-2">Requisitos</p>
+                  <ul className="list-disc list-inside space-y-1">
+                    {selectedPracticeDetails.requirements.map((req, index) => (
+                      <li key={index} className="text-sm text-muted-foreground">{req}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex items-center gap-4 pt-2 border-t">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">
+                      Fecha límite: {selectedPracticeDetails.deadline}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">
+                      {selectedPracticeDetails.spots} plazas disponibles
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </main>
     </div>
   );
