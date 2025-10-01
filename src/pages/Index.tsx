@@ -89,7 +89,7 @@ const Index = () => {
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button variant="hero" size="lg" asChild>
               <Link to="/practices">
-                Explorar Oportunidades
+                Explorar Prácticas
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
