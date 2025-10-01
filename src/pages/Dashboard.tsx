@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   FileText, 
   Clock, 
@@ -11,14 +12,38 @@ import {
   AlertCircle,
   Calendar,
   Building,
-  MapPin
+  MapPin,
+  ArrowUpDown
 } from "lucide-react";
 import { useApplications } from "@/contexts/ApplicationContext";
 import { useNavigate } from "react-router-dom";
+import { useState, useMemo } from "react";
 
 const Dashboard = () => {
   const { applications } = useApplications();
   const navigate = useNavigate();
+  const [sortBy, setSortBy] = useState<string>("date");
+
+  const sortedApplications = useMemo(() => {
+    const sorted = [...applications];
+    
+    switch (sortBy) {
+      case "name":
+        return sorted.sort((a, b) => a.title.localeCompare(b.title));
+      case "date":
+        return sorted.sort((a, b) => {
+          const dateA = new Date(a.appliedDate);
+          const dateB = new Date(b.appliedDate);
+          return dateB.getTime() - dateA.getTime();
+        });
+      case "status":
+        const statusOrder = { accepted: 0, under_review: 1, rejected: 2 };
+        return sorted.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+      default:
+        return sorted;
+    }
+  }, [applications, sortBy]);
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "accepted":
@@ -99,11 +124,26 @@ const Dashboard = () => {
         {/* Applications List */}
         <Card>
           <CardHeader>
-            <CardTitle>Tus Aplicaciones</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle>Tus Aplicaciones</CardTitle>
+              <div className="flex items-center gap-2">
+                <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Ordenar por" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="name">Nombre</SelectItem>
+                    <SelectItem value="date">Fecha de Aplicación</SelectItem>
+                    <SelectItem value="status">Estado</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {applications.map((application) => (
+              {sortedApplications.map((application) => (
                 <div key={application.id} className="border rounded-lg p-4 hover:shadow-card transition-shadow">
                   <div className="flex items-start justify-between mb-3">
                     <div>
